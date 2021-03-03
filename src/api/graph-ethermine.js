@@ -8,7 +8,10 @@ module.exports = {
 
 			const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 			const page = await browser.newPage();
-			await page.goto(url);
+			await page.goto(url, {
+				waitUntil: 'load',
+				timeout: 0,
+			});
 
 			await page.waitForSelector('#checkbox');
 			await page.evaluate(() => {
