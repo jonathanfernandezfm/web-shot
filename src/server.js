@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const { screenshot } = require('./api/screenshot');
+const { image } = require('./api/image');
 const { ethermine_graph } = require('./api/graph-ethermine');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,10 +15,15 @@ app.get('/', async (req, res) => {
 	res.json({ message: 'This api is for specific and personal use' });
 });
 
-app.get('/ethermine-shot.png', async (req, res) => {
-	const image = await ethermine_graph(req);
+app.get('/image.png', async (req, res) => {
+	const img = await image();
 	res.writeHead(200, { 'Content-Type': 'image/png' });
-	res.end(image, 'binary');
+	res.end(img, 'binary');
+});
+
+app.get('/ethermine-shot', async (req, res) => {
+	await ethermine_graph(req);
+	res.status(200).json({});
 });
 
 app.listen(port, () => {
