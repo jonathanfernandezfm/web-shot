@@ -15,7 +15,7 @@ app.get('/', async (req, res) => {
 	res.json({ message: 'This api is for specific and personal use' });
 });
 
-app.get('/ethermine-shot', async (req, res) => {
+app.get('/ethermine-shot.png', async (req, res) => {
 	const image = await ethermine_graph(req);
 	res.writeHead(200, { 'Content-Type': 'image/png' });
 	res.end(image, 'binary');
