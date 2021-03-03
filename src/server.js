@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const { screenshot } = require('./api/screenshot');
 const { ethermine_graph } = require('./api/graph-ethermine');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 app.use(helmet());
 app.use(cors());
